@@ -123,7 +123,6 @@ b) Make your computer guess your number");
             stopwatch.Start();
             Console.Clear();
             do {
-                Console.WriteLine(number);
                 Console.Write("Write your guess:\n>");
                 input = Console.ReadLine();
                 if (!(input == "")) {
