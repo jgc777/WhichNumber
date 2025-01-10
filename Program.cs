@@ -68,6 +68,9 @@ b) Make your computer guess your number");
                 case "b":
                     BinarySearch(100);
                     break;
+                default:
+                    Console.WriteLine("Invalid option!");
+                    break;
             }
         }
         static int BinarySearch(int start) {
@@ -100,7 +103,7 @@ b) Make your computer guess your number");
                         break;
                     default:
                         Console.WriteLine("Invalid option!");
-                        attempt = attempt - 1;
+                        attempt--;
                         break;
                 }
             } while (!finished);
@@ -140,11 +143,11 @@ b) Make your computer guess your number");
 
                     } else {
                         Console.WriteLine("Error. Try again.");
-                        attempt = attempt--;
+                        attempt--;
                     }
                 } else {
                     Console.WriteLine("Empty input.");
-                    attempt = attempt--;
+                    attempt--;
                     System.Threading.Thread.Sleep(2000);
                     GuessTheNumber(number);
                 }
