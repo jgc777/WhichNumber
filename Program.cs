@@ -136,9 +136,9 @@ b) Make your computer guess your number");
                         stopwatch.Stop();
                         Console.WriteLine($"You found the number {number} in {attempt} attempts ({stopwatch.Elapsed:hh\\:mm\\:ss})!");
                         break;
-                    } else if (guess < number) {
-                        Console.WriteLine($"Lower than {guess}!");
                     } else if (guess > number) {
+                        Console.WriteLine($"Lower than {guess}!");
+                    } else if (guess < number) {
                         Console.WriteLine($"Higher than {guess}!");
 
                     } else {
