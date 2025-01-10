@@ -80,7 +80,7 @@ b) Make your computer guess your number");
             int min = 0;
             int reference = 100;
             do {
-                attempt = attempt + 1;
+                attempt++;
                 Console.Clear();
                 Console.WriteLine("Is your number higher (+) lower (-) or equal (=) to " + reference + "?");
                 switch (Console.ReadKey().KeyChar) {
@@ -111,7 +111,7 @@ b) Make your computer guess your number");
         }
         static void GuessTheNumber(int number) {
             Console.Clear();
-            if (!(Math.Abs(number) == number)) {
+            if (Math.Abs(number) != number) {
                 Console.Write("Minimum number:\n>");
                 int min = Int32.Parse(Console.ReadLine());
                 Console.Write("Maximum number:\n>");
@@ -128,7 +128,13 @@ b) Make your computer guess your number");
             do {
                 Console.Write("Write your guess:\n>");
                 input = Console.ReadLine();
-                if (!(input == "")) {
+                if ((input.Length == 0)) {
+                    Console.WriteLine("Empty input.");
+                    attempt--;
+                    System.Threading.Thread.Sleep(2000);
+                    GuessTheNumber(number);
+
+                } else {
                     attempt++;
                     guess = Int32.Parse(input);
                     Console.Clear();
@@ -140,18 +146,11 @@ b) Make your computer guess your number");
                         Console.WriteLine($"Lower than {guess}!");
                     } else if (guess < number) {
                         Console.WriteLine($"Higher than {guess}!");
-
                     } else {
                         Console.WriteLine("Error. Try again.");
                         attempt--;
                     }
-                } else {
-                    Console.WriteLine("Empty input.");
-                    attempt--;
-                    System.Threading.Thread.Sleep(2000);
-                    GuessTheNumber(number);
                 }
-                
             } while (true);
         }
     }
