@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Check out repository
@@ -22,16 +22,16 @@ jobs:
       run: dotnet restore
 
     - name: Build and publish single file
-      run: dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true --self-contained true -o ./publish
+      run: dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained true -o ./publish
 
-    - name: List files in publish folder  # Verificar si el archivo existe
+    - name: List files in publish folder
       run: ls -l ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: published-app
-        path: ./publish/*  # Subir el archivo generado
+        path: ./publish/*
 
   release:
     needs: build
@@ -44,13 +44,13 @@ jobs:
         name: published-app
 
     - name: List downloaded files
-      run: ls -l ./WhichNumber  # Verificar que solo haya un archivo
+      run: ls -l ./WhichNumber
 
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
       with:
         name: "Release ${{ github.run_number }}"
         tag: ${{ github.run_number }}
-        body: "Archivo único publicado con .NET 8"
+        body: "Windows binary with .NET 8.0 included"
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: ./WhichNumber  # El archivo descargado ya está en ./WhichNumber
+        artifacts: ./WhichNumber
