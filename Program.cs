@@ -74,7 +74,8 @@ namespace WhichNumber {
                         break;
                 }
             } catch (Exception ex) {
-                Console.Write($"\nError: {ex.Message}\n"); // Automatically close
+                Console.Write($"\nError: {ex.Message}\n");
+                // Automatically close
             }
         }
         static void Help() {
@@ -83,7 +84,6 @@ namespace WhichNumber {
                 FileName = "http://jgc.linkpc.net/WhichNumber",
                 UseShellExecute = true
             });
-            Environment.Exit(0); // Close
         }
         static void Banner() {
             Console.WriteLine(@"
@@ -104,7 +104,7 @@ b) Make your computer guess your number
 c) Get more info
 d) Exit");
             switch (Console.ReadKey().KeyChar.ToString().ToLower()[0]) {
-                // Read key, then convert to string, then convert to lower case, then get first character
+                // Read key, then convert to lower case
                 case 'a':
                     GuessTheNumber(-1);
                     break;
@@ -115,7 +115,6 @@ d) Exit");
                     Help();
                     break;
                 case 'd':
-                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Invalid option!");
@@ -156,32 +155,42 @@ d) Exit");
             return reference;
         }
         static int GuessTheNumber(int number) {
+            string input;
+            int max = 100;
+            int min = 0;
+            int attempt = 0;
+            int guess = 0;
+            Stopwatch stopwatch = new Stopwatch();
             Console.Clear();
             if (Math.Abs(number) != number) {
                 // Negative number, so generate a random number
                 Console.Write("Minimum number:\n>");
-                int min = Int32.Parse(Console.ReadLine());
+                input = Console.ReadLine();
+                if (!int.TryParse(input, out min) || string.IsNullOrEmpty(input)) {
+                    // If not a number or empty, else use the number
+                    Console.WriteLine("Invalid/empty input. Using 0");
+                }
                 Console.Write("Maximum number:\n>");
-                int max = Int32.Parse(Console.ReadLine());
+                input = Console.ReadLine();
+                if (!int.TryParse(input, out max) || string.IsNullOrEmpty(input)) {
+                    // If not a number or empty, else use the number
+                    Console.WriteLine("Invalid/empty input. Using 100");
+                }
                 Random random = new Random();
                 number = random.Next(min, max + 1);
             }
-            string input;
-            int attempt = 0;
-            int guess = 0;
-            Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.Clear();
             do {
                 Console.Write("Write your guess:\n>");
                 input = Console.ReadLine();
-                if ((input.Length == 0)) {
-                    Console.WriteLine("Empty input.");
+                if (!int.TryParse(input, out guess) || string.IsNullOrEmpty(input)) {
+                    // If not a number or empty, else use the number
+                    Console.WriteLine("Invalid/empty input.");
                 } else {
                     attempt++; // Count attempt
-                    Console.WriteLine($"Attempt #{attempt}, {stopwatch.Elapsed:hh\\:mm\\:ss} elapsed");
-                    guess = Int32.Parse(input);
                     Console.Clear();
+                    Console.WriteLine($"Attempt #{attempt}, {stopwatch.Elapsed:hh\\:mm\\:ss} elapsed"); // Show attempt and time
                     if (guess == number) {
                         stopwatch.Stop();
                         Console.WriteLine($"You found the number {number} in {attempt} attempts ({stopwatch.Elapsed:hh\\:mm\\:ss})!");
