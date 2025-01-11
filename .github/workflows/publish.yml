@@ -1,4 +1,4 @@
-name: Publish for .NEt 8.0
+name: Publish for .NET 8.0
 
 on:
   push:
@@ -31,6 +31,7 @@ jobs:
         path: ./publish
 
   release:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
