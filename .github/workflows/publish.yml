@@ -30,12 +30,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Upload Release Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: WhichNumber
-          path: output
-
       - name: Create or Update Release
         id: create_release
         uses: softprops/action-gh-release@v1
