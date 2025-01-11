@@ -38,13 +38,13 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: published-app
+        name: published-app  # Nombre del artefacto
 
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: ./publish/*  # Incluye todos los archivos de la carpeta
+        name: "Release ${{ github.run_number }}"  # Cambié release_name a name
+        tag: ${{ github.run_number }}  # Usamos un número de run como tag
+        body: "Archivo único publicado con .NET 8"
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.run_number }}
-        release_name: Release ${{ github.run_number }}
-        body: "Test"
+        artifacts: ./WhichNumber/publish/*  # Ruta correcta al artefacto descargado
