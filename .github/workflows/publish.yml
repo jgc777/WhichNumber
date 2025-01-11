@@ -40,11 +40,14 @@ jobs:
       with:
         name: published-app  # Nombre del artefacto
 
+    - name: List downloaded files
+      run: ls -R ./WhichNumber  # Esto imprimirá la estructura del directorio
+
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
       with:
-        name: "Release ${{ github.run_number }}"  # Cambié release_name a name
-        tag: ${{ github.run_number }}  # Usamos un número de run como tag
+        name: "Release ${{ github.run_number }}"
+        tag: ${{ github.run_number }}
         body: "Archivo único publicado con .NET 8"
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: ./WhichNumber/publish/*  # Ruta correcta al artefacto descargado
+        artifacts: ./WhichNumber/publish/*  # Ajusta según la ruta correcta
