@@ -49,8 +49,8 @@ jobs:
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
       with:
-        name: "Latest"
-        tag: ${{ github.run_number }}
-        body: "latest windows binary with .NET 8.0 included"
+        name: "Build ${{ github.run_number }}"
+        tag: "latest"
+        body: "Latest windows binary with .NET 8.0 included (automatically compiled)"
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ./*
