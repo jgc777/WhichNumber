@@ -1,0 +1,49 @@
+name: Publish for .NEt 8.0
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build and publish single file
+      run: dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true --self-contained true -o ./publish
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: published-app
+        path: ./publish
+
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: published-app
+
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: ./publish/*  # Incluye todos los archivos de la carpeta
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        body: "Test"
