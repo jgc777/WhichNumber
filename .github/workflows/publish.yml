@@ -28,4 +28,29 @@ jobs:
       run: ls -l ./publish
 
     - name: Upload artifact
-      uses: act
+      uses: actions/upload-artifact@v3
+      with:
+        name: published-app
+        path: ./publish/*  # Asegúrate de subir los archivos correctos
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: published-app
+
+    - name: List downloaded files
+      run: ls -l ./WhichNumber  # Verificar qué se ha descargado
+
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+        name: "Release ${{ github.run_number }}"
+        tag: ${{ github.run_number }}
+        body: "Archivo único publicado con .NET 8"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: ./WhichNumber/*  # Apuntar al archivo en lugar de una carpeta
