@@ -74,13 +74,16 @@ namespace WhichNumber {
                         break;
                 }
             } catch (Exception ex) {
-                Console.Write($"\nError: {ex.Message}\n");
-                // Automatically close
+                Console.Write($"\nError: {ex.Message}\n"); // Automatically close
             }
         }
         static void Help() {
-            Console.WriteLine("Opening project website...");
-            System.Diagnostics.Process.Start("http://jgc.linkpc.net/WhichNumber/");
+            Console.Write("\nOpening project website...");
+            System.Diagnostics.Process.Start(new ProcessStartInfo {
+                FileName = "http://jgc.linkpc.net/WhichNumber",
+                UseShellExecute = true
+            });
+            Environment.Exit(0); // Close
         }
         static void Banner() {
             Console.WriteLine(@"
