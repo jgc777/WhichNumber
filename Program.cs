@@ -75,8 +75,9 @@ namespace WhichNumber {
                 }
             } catch (Exception ex) {
                 Console.Write($"\nError: {ex.Message}\n");
-                // Automatically close
             }
+            Console.WriteLine("\nPress any key to exit...");
+            Console.ReadKey();
         }
         static void Help() {
             Console.Write("\nOpening project website...");
