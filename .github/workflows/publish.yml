@@ -44,7 +44,7 @@ jobs:
         name: published-app
 
     - name: List downloaded files
-      run: ls -l ./WhichNumber
+      run: ls -l ./publish
 
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
