@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore
 
     - name: Build and publish single file
-      run: dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained true -o ./publish
+      run: dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained true -o ./publish -p:PublishTrimmed=true -p:PublishReadyToRun=true
 
     - name: List files in publish folder
       run: ls -l ./publish
@@ -49,8 +49,8 @@ jobs:
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
       with:
-        name: "Release ${{ github.run_number }}"
+        name: "Latest"
         tag: ${{ github.run_number }}
-        body: "Windows binary with .NET 8.0 included"
+        body: "latest windows binary with .NET 8.0 included"
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ./*
