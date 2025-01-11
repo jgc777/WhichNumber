@@ -48,7 +48,6 @@ jobs:
           files: output/*.exe # Cambia la extensión si no es .exe
           tag_name: latest
           target_commitish: ${{ github.sha }}
-          overwrite: true
           body: |
             **Latest windows build**
             - Automatically generated using the latest code.
