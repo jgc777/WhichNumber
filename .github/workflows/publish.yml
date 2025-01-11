@@ -45,7 +45,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: output/*.exe # Cambia la extensión si no es .exe
+          files: ./output/*
           tag_name: latest
           target_commitish: ${{ github.sha }}
           body: |
