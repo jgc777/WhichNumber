@@ -24,30 +24,8 @@ jobs:
     - name: Build and publish single file
       run: dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true --self-contained true -o ./publish
 
+    - name: List files in publish folder  # Verificar si el archivo existe
+      run: ls -l ./publish
+
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: published-app
-        path: ./publish
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: published-app  # Nombre del artefacto
-
-    - name: List downloaded files
-      run: ls -R ./WhichNumber  # Esto imprimirá la estructura del directorio
-
-    - name: Create GitHub Release
-      uses: ncipollo/release-action@v1
-      with:
-        name: "Release ${{ github.run_number }}"
-        tag: ${{ github.run_number }}
-        body: "Archivo único publicado con .NET 8"
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: ./WhichNumber/publish/*  # Ajusta según la ruta correcta
+      uses: act
