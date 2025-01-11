@@ -45,7 +45,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./output/*
+          files: .\bin\Release\net8.0\win-x64\publish\*
           tag_name: latest
           target_commitish: ${{ github.sha }}
           body: |
