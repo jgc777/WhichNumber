@@ -31,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: published-app
-        path: ./publish/*  # Asegúrate de subir los archivos correctos
+        path: ./publish/*  # Subir el archivo generado
 
   release:
     needs: build
@@ -44,7 +44,7 @@ jobs:
         name: published-app
 
     - name: List downloaded files
-      run: ls -l ./WhichNumber  # Verificar qué se ha descargado
+      run: ls -l ./WhichNumber  # Verificar que solo haya un archivo
 
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
@@ -53,4 +53,4 @@ jobs:
         tag: ${{ github.run_number }}
         body: "Archivo único publicado con .NET 8"
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: ./WhichNumber/*  # Apuntar al archivo en lugar de una carpeta
+        artifacts: ./WhichNumber  # El archivo descargado ya está en ./WhichNumber
