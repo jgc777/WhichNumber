@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '*.md'
+      - '*.yml'
+      - '.git*'
+      - 'LICENSE'
 
 jobs:
   build:
@@ -13,7 +18,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v3
 
-    - name: Set up .NET
+    - name: Set up .NET 8.0
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
@@ -21,11 +26,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build and publish single file
+    - name: Build and publish
       run: dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained true -o ./publish -p:PublishTrimmed=true -p:PublishReadyToRun=true
-
-    - name: List files in publish folder
-      run: ls -l ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -42,9 +44,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: published-app
-
-    - name: List downloaded files
-      run: ls -l
 
     - name: Create GitHub Release
       uses: ncipollo/release-action@v1
