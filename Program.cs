@@ -102,8 +102,7 @@ namespace WhichNumber {
             Console.WriteLine(@"Do you want to:
 a) Guess the computer number
 b) Make your computer guess your number
-c) Get more info
-d) Exit");
+c) Get more info");
             switch (Console.ReadKey().KeyChar.ToString().ToLower()[0]) {
                 // Read key, then convert to lower case
                 case 'a':
@@ -114,8 +113,6 @@ d) Exit");
                     break;
                 case 'c':
                     Help();
-                    break;
-                case 'd':
                     break;
                 default:
                     Console.WriteLine("Invalid option!");
