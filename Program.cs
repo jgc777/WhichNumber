@@ -95,7 +95,7 @@ namespace WhichNumber {
                                                ╚█████╔╝╚██████╔╝╚██████╗   ██║  
                                                 ╚════╝  ╚═════╝  ╚═════╝   ╚═╝  
 ");
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000); // Wait 1 second
             Console.Clear();
         }
         static void Menu() {
