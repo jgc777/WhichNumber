@@ -6,7 +6,6 @@ on:
       - master
     paths-ignore:
       - '*.md'
-      - '*.yml'
       - '.git*'
       - 'LICENSE'
 
@@ -50,6 +49,6 @@ jobs:
       with:
         name: "Build ${{ github.run_number }}"
         tag: ${{ github.run_number }}
-        body: "Latest windows binary with .NET 8.0 included (automatically compiled)"
+        body: "Latest windows binary with .NET 8.0 included (automatically compiled)\nFull Changelog: https://github.com/jgc777/WhichNumber/compare/$(( ${GITHUB_RUN_NUMBER} - 1 ))...${{ github.run_number }}"
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ./*
