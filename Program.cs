@@ -82,7 +82,7 @@ namespace WhichNumber {
         static void Help() {
             Console.Write("\nOpening project website...");
             System.Diagnostics.Process.Start(new ProcessStartInfo {
-                FileName = "http://jgc.linkpc.net/WhichNumber",
+                FileName = "https://jgc777.github.io/WhichNumber",
                 UseShellExecute = true
             });
         }
