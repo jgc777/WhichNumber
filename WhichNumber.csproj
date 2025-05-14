@@ -13,9 +13,9 @@
     <Title>Which Number?</Title>
     <Company>Jgc7</Company>
     <Description>Binary Search and number guessing game</Description>
-    <PackageProjectUrl>http://jgc.linkpc.net/WhichNumber/</PackageProjectUrl>
+    <PackageProjectUrl>https://jgc777.github.io/WhichNumber/</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/jgc777/WhichNumber</RepositoryUrl>
+    <RepositoryUrl>https://jgc777.github.io/WhichNumber</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
